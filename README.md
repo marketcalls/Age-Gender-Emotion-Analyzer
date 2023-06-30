@@ -2,6 +2,10 @@
 
 This repository contains code for training models to recognize age, gender, and emotion from images and analyzing faces from images or a webcam feed using these models implemented using CNN-keras.
 
+## Output
+
+![](examples/1.png)
+
 ## Description
 
 The project includes four main Python scripts:
