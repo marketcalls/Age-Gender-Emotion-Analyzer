@@ -1,6 +1,6 @@
 # AGenEmozer (Age, Gender, and Emotion Analyzer)
 
-This repository contains code for training models to recognize age, gender, and emotion from images and analyzing faces from images or a webcam feed using these models implemented using CNN-keras.
+This repository contains code for training models to recognize age, gender, and emotion from images and analyzing faces from images or a webcam feed using these models.
 
 ## Output
 
