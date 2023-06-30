@@ -1,147 +1,98 @@
+import argparse
+import os
 import cv2
 import numpy as np
 from keras.models import load_model
-import argparse
+from matplotlib import pyplot as plt
 
-# Define the model paths
-AGE_MODEL_PATH = 'age_model.h5'
-GENDER_MODEL_PATH = 'gender_model.h5'
-EMOTION_MODEL_PATH = 'emotion_model.h5'
 
-# Define the input shape for the models
-INPUT_SHAPE = (200, 200, 1)
+def load_models():
+    """Load the pre-trained models for age, gender and emotion prediction."""
 
-# Define the labels for gender and emotion
-GENDER_LABELS = ['Male', 'Female']
-EMOTION_LABELS = ['Positive', 'Negative', 'Neutral']
+    age_model_path = './model/age_model.h5'
+    gender_model_path = './model/gender_model.h5'
+    emotion_model_path = './model/emotion_model.h5'
 
-# Define the age mapping
-def map_age(age):
-    if 1 <= age <= 2:
-        return 0
-    elif 3 <= age <= 9:
-        return 1
-    elif 10 <= age <= 20:
-        return 2
-    elif 21 <= age <= 27:
-        return 3
-    elif 28 <= age <= 45:
-        return 4
-    elif 46 <= age <= 65:
-        return 5
+    age_model = load_model(age_model_path)
+    gender_model = load_model(gender_model_path)
+    emotion_model = load_model(emotion_model_path)
+
+    return age_model, gender_model, emotion_model
+
+
+def get_image(img_path=None):
+    """Load the image for prediction."""
+    if img_path is None:
+        # Open webcam if no image is provided
+        cap = cv2.VideoCapture(0)
+        ret, frame = cap.read()
+        cap.release()
+        return frame
     else:
-        return 6
+        # Load image from file
+        return cv2.imread(img_path)
 
-# Define the emotion mapping
-def map_emotion(label):
-    if label in [4, 6]:
-        return 0  # Positive emotion
-    elif label in [0, 5]:
-        return 1  # Negative emotion
-    else:
-        return 2  # Neutral emotion
 
-class FaceAnalyzer:
-    """Class for predicting age, gender, and emotion from an image or webcam feed."""
+def predict(image, age_model, gender_model, emotion_model):
+    """Predict the age, gender, and emotion for the given image."""
 
-    def __init__(self, age_model_path, gender_model_path, emotion_model_path):
-        self.age_model = load_model(age_model_path)
-        self.gender_model = load_model(gender_model_path)
-        self.emotion_model = load_model(emotion_model_path)
-        self.input_shape = INPUT_SHAPE
-        self.gender_labels = GENDER_LABELS
-        self.emotion_labels = EMOTION_LABELS
+    age_ranges = ['1-2', '3-9', '10-20', '21-27', '28-45', '46-65', '66-116']
+    gender_ranges = ['male', 'female']
+    emotion_ranges = ['positive', 'negative', 'neutral']
 
-        # Load Haar cascade classifier for face detection
-        self.face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+    faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 
-    def preprocess_image(self, image):
-        """Preprocess the image for model prediction."""
-        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    i = 0
+    for (x, y, w, h) in faces:
+        i = i+1
+        cv2.rectangle(image, (x, y), (x+w, y+h), (203, 12, 255), 2)
 
-        # Detect faces in the image
-        faces = self.face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+        img_gray = gray[y:y+h, x:x+w]
 
-        if len(faces) == 0:
-            return None
+        emotion_img = cv2.resize(img_gray, (48, 48), interpolation=cv2.INTER_AREA)
+        emotion_image_array = np.array(emotion_img)
+        emotion_input = np.expand_dims(emotion_image_array, axis=0)
+        output_emotion = emotion_ranges[np.argmax(emotion_model.predict(emotion_input))]
 
-        # Extract the first detected face
-        (x, y, w, h) = faces[0]
-        face_roi = gray[y:y + h, x:x + w]
+        gender_img = cv2.resize(img_gray, (100, 100), interpolation=cv2.INTER_AREA)
+        gender_image_array = np.array(gender_img)
+        gender_input = np.expand_dims(gender_image_array, axis=0)
+        output_gender = gender_ranges[np.argmax(gender_model.predict(gender_input))]
 
-        resized = cv2.resize(face_roi, self.input_shape[:2])
-        normalized = resized / 255.0
-        reshaped = np.reshape(normalized, (1, *self.input_shape))
-        return reshaped
+        age_image = cv2.resize(img_gray, (200, 200), interpolation=cv2.INTER_AREA)
+        age_input = age_image.reshape(-1, 200, 200, 1)
+        output_age = age_ranges[np.argmax(age_model.predict(age_input))]
 
-    def predict_age_gender_emotion(self, image):
-        """Predict age, gender, and emotion from the given image."""
-        preprocessed_image = self.preprocess_image(image)
+        output_str = str(i) + ": " + output_gender + ', ' + output_age + ', ' + output_emotion
+        print(output_str)
 
-        if preprocessed_image is None:
-            return None
+        col = (0, 255, 0)
 
-        age_prediction = self.age_model.predict(preprocessed_image)
-        predicted_age = map_age(np.argmax(age_prediction))
+        cv2.putText(image, str(i), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, col, 2)
 
-        gender_prediction = self.gender_model.predict(preprocessed_image)
-        predicted_gender = self.gender_labels[np.argmax(gender_prediction)]
+    plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+    plt.show()
 
-        emotion_prediction = self.emotion_model.predict(preprocessed_image)
-        predicted_emotion = self.emotion_labels[map_emotion(np.argmax(emotion_prediction))]
 
-        return predicted_age, predicted_gender, predicted_emotion
+def main():
+    """Main function to execute the script."""
+    # Load models
+    age_model, gender_model, emotion_model = load_models()
 
-    def predict_image(self, image_path):
-        """Predict age, gender, and emotion from an image."""
-        image = cv2.imread(image_path)
-        predicted_age, predicted_gender, predicted_emotion = self.predict_age_gender_emotion(image)
-
-        if predicted_age is None:
-            print("No face detected in the image.")
-            return
-
-        prediction_text = f'Age: {predicted_age}  Gender: {predicted_gender}  Emotion: {predicted_emotion}'
-        cv2.putText(image, prediction_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
-        cv2.imshow('Image', image)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-
-    def predict_webcam(self):
-        """Predict age, gender, and emotion from the webcam feed."""
-        capture = cv2.VideoCapture(0)
-        while True:
-            ret, frame = capture.read()
-            if not ret:
-                break
-
-            cv2.imshow('Webcam', frame)
-
-            predicted_age, predicted_gender, predicted_emotion = self.predict_age_gender_emotion(frame)
-
-            if predicted_age is not None:
-                prediction_text = f'Age: {predicted_age}  Gender: {predicted_gender}  Emotion: {predicted_emotion}'
-                cv2.putText(frame, prediction_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
-
-            cv2.imshow('Webcam', frame)
-
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
-
-        capture.release()
-        cv2.destroyAllWindows()
-
-if __name__ == '__main__':
     # Parse command-line arguments
-    parser = argparse.ArgumentParser(description='Predict age, gender, and emotion from an image or webcam.')
-    parser.add_argument('--image', type=str, help='Path to the image file')
+    parser = argparse.ArgumentParser(description='Predict age, gender and emotion from image.')
+    parser.add_argument('--image', metavar='path', type=str, help='The path to an image file')
+
     args = parser.parse_args()
 
-    # Create the FaceAnalyzer instance
-    analyzer = FaceAnalyzer(AGE_MODEL_PATH, GENDER_MODEL_PATH, EMOTION_MODEL_PATH)
+    # Load image
+    image = get_image(args.image)
 
-    # Check if image path is provided
-    if args.image:
-        analyzer.predict_image(args.image)
-    else:
-        analyzer.predict_webcam()
+    # Predict
+    predict(image, age_model, gender_model, emotion_model)
+
+
+if __name__ == "__main__":
+    main()
