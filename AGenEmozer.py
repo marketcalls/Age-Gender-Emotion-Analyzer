@@ -47,7 +47,7 @@ def predict(image, age_model, gender_model, emotion_model):
     i = 0
     for (x, y, w, h) in faces:
         i = i+1
-        cv2.rectangle(image, (x, y), (x+w, y+h), (203, 12, 255), 2)
+        cv2.rectangle(image, (x, y), (x+w, y+h), (203, 12, 255), 3)  # Increased thickness
 
         img_gray = gray[y:y+h, x:x+w]
 
@@ -68,14 +68,19 @@ def predict(image, age_model, gender_model, emotion_model):
         output_str = str(i) + ": " + output_gender + ', ' + output_age + ', ' + output_emotion
         print(output_str)
 
-        col = (0, 255, 0)
+        text_col = (255, 255, 255)  # Changed color to white
+        box_col = (203, 12, 255)  # Same color as rectangle around the face
 
-        cv2.putText(image, str(i), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, col, 2)
+        # Print the predictions on the image
+        y0, dy = y, 30  # y0 and dy control the position and size of the text background box
+        for j, line in enumerate(output_str.split('\n')):
+            yj = y0 + j*dy
+            cv2.rectangle(image, (x, yj - dy), (x + w, yj), box_col, -1)
+            cv2.putText(image, line, (x, yj), cv2.FONT_HERSHEY_SIMPLEX, 5, text_col, 25)  # Increased font size and thickness
 
     plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
     plt.show()
-
-
+ 
 def main():
     """Main function to execute the script."""
     # Load models
