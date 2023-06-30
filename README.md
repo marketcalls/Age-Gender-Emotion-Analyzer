@@ -35,7 +35,7 @@ Training is optional. Pre-trained models are present in _./model/. folder.
 Download the datasets and place them under _./data/_ folder before training. 
 
 1. *Age* : [Merged & Augmented UTK Faces & Facial Age Dataset](https://www.kaggle.com/datasets/skillcate/merged-augmented-utk-faces-facial-age-dataset)
-2. *Gender* : [UTKFace]([https://drive.google.com/drive/folders/1lRwIvY8fCrcn_8lP4XGOMZsjato9Q_IU?usp=drive_link](https://susanqq.github.io/UTKFace/))
+2. *Gender* : [UTKFace](https://susanqq.github.io/UTKFace/)
 3. *Emotion* : [CK + 48](https://drive.google.com/drive/folders/1YEOBooxcTI4H8sIXhZ69sKPGhVRFDl_5?usp=drive_link)
 
 ### Train the Models
