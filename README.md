@@ -1,48 +1,77 @@
-# AGenR (Age & Gender Recognizer)
-This repository contains two scripts for training and predicting age and gender using Convolutional Neural Network models.
+# Age, Gender, and Emotion Analyzer
 
-## Prerequisites
-- Python 3.6+
-- OpenCV : ```python pip install opencv-python```
-- TensorFlow : ```python pip install tensorflow```
-- NumPy : ```python pip install numpy```
-- pandas : ```python pip install pandas```
-- scikit-learn : ```python pip install scikit-learn```
- ## pred.py
-This script predicts the age and gender of a person from an image or real-time video using pre-trained deep learning models. It utilizes OpenCV for face detection and TensorFlow for model inference.
+This repository contains code for training models to recognize age, gender, and emotion from images and analyzing faces from images or a webcam feed using these models.
 
-### Usage
-Run the script from the command line with the following options:
+## Description
 
--  Predict from an Image
-```python 
-python pred.py --image [image_path]
+The project includes four main Python scripts:
+
+1. **age_training.py**: This script is for training a Convolutional Neural Network (CNN) model to recognize different age groups from images. The trained model is saved as 'age_model.h5'.
+
+2. **gender_training.py**: This script is for training a CNN model to recognize gender from images. The trained model is saved as 'gender_model.h5'.
+
+3. **emotion_training.py**: This script is for training a CNN model to recognize three classes of emotions from images: positive, negative, and neutral. The trained model is saved as 'emotion_model.h5'.
+
+4. **AGenEmozer.py**: This script uses three pre-trained models to analyze faces in images or from a webcam feed. It predicts the age, gender, and emotion for each detected face.
+
+## Installation
+
+1. Clone this repository.
+```bash
+git clone https://github.com/yourusername/yourrepository.git
 ```
-* Predict from Real-time Video (Webcam)
-```python 
-python pred.py
+
+2. Install required Python packages.
+```bash
+pip install -r requirements.txt
 ```
-The script will open the webcam and continuously predict the age and gender of the people in the video stream. Press the 'q' key to exit the program.
 
-## train.py
-This script trains deep learning models for age and gender classification using the Adience Benchmark dataset. It performs data preprocessing, creates TensorFlow datasets, builds and trains the models, and saves the trained models.
+## Usage
 
-### Dataset
-To use this script, you need to download the [Adience Benchmark dataset](https://www.kaggle.com/datasets/ttungl/adience-benchmark-gender-and-age-classification) and place it in the _./archive/AdienceBenchmarkGenderAndAgeClassification/_ directory.
+### Train the Models
 
-### Usage
-Run the script from the command line:
-``` python
-python train.py
+Each training script accepts a configuration file as an argument. These configuration files are expected to be in YAML format and specify details like the directory of the training data, the model path, the number of epochs for training, and other parameters.
+
+1. Run the `age_training.py` script.
+
+```bash
+python age_training.py --config ./configs/age_config.yaml
 ```
-The script will load the dataset, perform data analysis, preprocess the data, split it into train and validation sets, create TensorFlow datasets, build and train the age and gender models, and save the trained models.
 
-## Models
-The script builds and trains two models:
+2. Run the `gender_training.py` script.
 
-+ Age Model: A convolutional neural network (CNN) model for age classification.
-+ Gender Model: A CNN model for gender classification.
+```bash
+python gender_training.py --config ./configs/gender_config.yaml
+```
 
-The trained models are saved in the _./models/age/_ and _./models/gender/_ directories, respectively.
+3. Run the `emotion_training.py` script.
 
-**For further details, please refer to the code comments within each script.**
+```bash
+python emotion_training.py --config ./configs/emotion_config.yaml
+```
+
+### Use the Age, Gender, and Emotion Analyzer
+
+Run the `AGenEmozer.py` script. 
+
+- To analyze an image, provide the image path as an argument:
+```bash
+python AGenEmozer.py --image ./path/to/your/image.jpg
+```
+
+- To analyze the webcam feed, run the script without the image argument:
+```bash
+python AGenEmozer.py
+```
+
+## Note
+
+Please ensure that the models 'age_model.h5', 'gender_model.h5', and 'emotion_model.h5' are present in the root directory of the project. You can train these models using the provided scripts.
+
+## Contribution
+
+Contributions are welcome! Please create an issue for discussion before submitting a pull request.
+
+## License
+
+This project is licensed under the MIT License. Please see the [LICENSE](LICENSE) file for details.
