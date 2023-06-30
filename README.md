@@ -56,7 +56,7 @@ Run the `AGenEmozer.py` script.
 
 - To analyze an image, provide the image path as an argument:
 ```bash
-python AGenEmozer.py --image ./path/to/your/image.jpg
+python AGenEmozer.py --image <image_path.jpg>
 ```
 
 - To analyze the webcam feed, run the script without the image argument:
