@@ -10,8 +10,6 @@ This repository contains code for training models to recognize age, gender, and 
 
 ## Description
 
-> **Note:** Pre-Trained models are present in _./model/_ directory.
-> 
 The project includes four main Python scripts:
 
 1. **age_training.py**: This script is for training a Convolutional Neural Network (CNN) model to recognize different age groups from images. The trained model is saved as 'age_model.h5'.
@@ -35,6 +33,8 @@ pip install -r requirements.txt
 ```
 
 ## Usage
+
+> **Note:** Pre-Trained models are present in _./model/_ directory.
 
 ### Training Datasets
 
