@@ -1,0 +1,6 @@
+dir_path: "./data/CK+48"
+model_path: "./model/emotion_model.h5"
+dropout_rate: 0.1
+regularizer_rate: 0.001
+random_state: 10
+epochs: 50

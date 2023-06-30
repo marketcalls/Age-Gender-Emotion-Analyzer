@@ -1,0 +1,6 @@
+DATASET_PATH : "./data/combined_faces.zip"
+AUGMENTED_DATASET_PATH : "./data/combined_faces_train_augmented.zip"
+NUM_CLASSES : 7 
+LOG_DIR : './output/cnn_logs'
+MODEL_CHECKPOINT_PATH : f"{LOG_DIR}/age_model_checkpoint.h5"
+OUTPUT_MODEL_PATH : './model/age_model'

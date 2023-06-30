@@ -1,0 +1,7 @@
+img_size: 100
+dropout_rate: 0.1
+regularizer_rate: 0.001
+dir_path: "./data/UTKFace"
+model_path: './model/gender_model.h5'
+random_state: 100
+epochs: 30
