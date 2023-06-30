@@ -2,6 +2,12 @@
 
 This repository contains code for training models to recognize age, gender, and emotion from images and analyzing faces from images or a webcam feed using these models implemented using CNN-keras.
 
+## Output
+
+![](examples/1.png)
+![](examples/2.png)
+![](examples/3.png)
+
 ## Description
 
 The project includes four main Python scripts:
@@ -27,6 +33,8 @@ pip install -r requirements.txt
 ```
 
 ## Usage
+
+> **Note:** Pre-Trained models are present in _./model/_ directory.
 
 ### Training Datasets
 
@@ -74,7 +82,7 @@ python AGenEmozer.py
 
 ## Note
 
-Please ensure that the models 'age_model.h5', 'gender_model.h5', and 'emotion_model.h5' are present in the root directory of the project. You can train these models using the provided scripts.
+Please ensure that the models 'age_model.h5', 'gender_model.h5', and 'emotion_model.h5' are present in _./model/_ directory of the project. You can train these models using the provided scripts.
 
 ## Contribution
 
