@@ -82,7 +82,7 @@ python AGenEmozer.py
 
 ## Note
 
-Please ensure that the models 'age_model.h5', 'gender_model.h5', and 'emotion_model.h5' are present in the root directory of the project. You can train these models using the provided scripts.
+Please ensure that the models 'age_model.h5', 'gender_model.h5', and 'emotion_model.h5' are present in _./model/_ directory of the project. You can train these models using the provided scripts.
 
 ## Contribution
 
