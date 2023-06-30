@@ -18,7 +18,7 @@ The project includes four main Python scripts:
 
 1. Clone this repository.
 ```bash
-git clone https://github.com/yourusername/yourrepository.git
+git clone https://github.com/Tejarsha-Arigila/Age-Gender-Emotion-Analyzer.git
 ```
 
 2. Install required Python packages.
