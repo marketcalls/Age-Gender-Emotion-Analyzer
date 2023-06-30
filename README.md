@@ -5,6 +5,8 @@ This repository contains code for training models to recognize age, gender, and 
 ## Output
 
 ![](examples/1.png)
+![](examples/2.png)
+![](examples/3.png)
 
 ## Description
 
