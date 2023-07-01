@@ -9,12 +9,6 @@
 
 This repository contains code for training models to recognize age, gender, and emotion from images and analyzing faces from images or a webcam feed using these models.
 
-## Output
-
-![](examples/1.png)
-![](examples/2.png)
-![](examples/3.png)
-
 # Table of Contents
 
 - [AGenEmozer (Age, Gender, and Emotion Analyzer)](#agenemozer-age-gender-and-emotion-analyzer)
@@ -28,6 +22,12 @@ This repository contains code for training models to recognize age, gender, and 
   - [Note](#note)
   - [Contribution](#contribution)
   - [License](#license)
+
+## Output
+
+![](examples/1.png)
+![](examples/2.png)
+![](examples/3.png)
 
 ## Description
 
