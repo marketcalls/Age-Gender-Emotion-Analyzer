@@ -15,6 +15,20 @@ This repository contains code for training models to recognize age, gender, and 
 ![](examples/2.png)
 ![](examples/3.png)
 
+# Table of Contents
+
+- [AGenEmozer (Age, Gender, and Emotion Analyzer)](#agenemozer-age-gender-and-emotion-analyzer)
+  - [Output](#output)
+  - [Description](#description)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [Training Datasets](#training-datasets)
+    - [Train the Models](#train-the-models)
+    - [Use the Age, Gender, and Emotion Analyzer](#use-the-age-gender-and-emotion-analyzer)
+  - [Note](#note)
+  - [Contribution](#contribution)
+  - [License](#license)
+  - 
 ## Description
 
 The project includes four main Python scripts:
