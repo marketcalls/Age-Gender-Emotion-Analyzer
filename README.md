@@ -113,7 +113,7 @@ Contributions are welcome! Please create an issue for discussion before submitti
 
 This project is licensed under the MIT License. Please see the [LICENSE](LICENSE) file for details.
 
-##Citations
+## Citations
 [1]
 ``` plaintext
 @inproceedings{zhifei2017cvpr,
