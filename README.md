@@ -22,7 +22,7 @@ This repository contains code for training models to recognize age, gender, and 
   - [Description](#description)
   - [Installation](#installation)
   - [Usage](#usage)
-    - [Training Datasets](#training-datasets)
+    - [Datasets](#training-datasets)
     - [Train the Models](#train-the-models)
     - [Use the Age, Gender, and Emotion Analyzer](#use-the-age-gender-and-emotion-analyzer)
   - [Note](#note)
@@ -57,7 +57,7 @@ pip install -r requirements.txt
 
 > **Note:** Pre-Trained models are present in _./model/_ directory.
 
-### Training Datasets
+### Datasets
 
 Download the datasets and place them under _./data/_ folder before training. 
 
