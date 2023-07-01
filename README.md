@@ -28,7 +28,7 @@ This repository contains code for training models to recognize age, gender, and 
   - [Note](#note)
   - [Contribution](#contribution)
   - [License](#license)
-  - [Citations](#citations)
+
 ## Description
 
 The project includes four main Python scripts:
@@ -62,7 +62,7 @@ pip install -r requirements.txt
 Download the datasets and place them under _./data/_ folder before training. 
 
 1. *Age* : [Merged & Augmented UTK Faces & Facial Age Dataset](https://www.kaggle.com/datasets/skillcate/merged-augmented-utk-faces-facial-age-dataset)
-2. *Gender* : [UTKFace](https://susanqq.github.io/UTKFace/)<sup>[1]</sup>
+2. *Gender* : [UTKFace](https://susanqq.github.io/UTKFace/)
 3. *Emotion* : [CK + 48](https://drive.google.com/drive/folders/1YEOBooxcTI4H8sIXhZ69sKPGhVRFDl_5?usp=drive_link)
 
 ### Train the Models
@@ -112,14 +112,3 @@ Contributions are welcome! Please create an issue for discussion before submitti
 ## License
 
 This project is licensed under the MIT License. Please see the [LICENSE](LICENSE) file for details.
-
-## Citations
-``` plaintext
-[1]@inproceedings{zhifei2017cvpr,
-  title={Age Progression/Regression by Conditional Adversarial Autoencoder},
-  author={Zhang, Zhifei, Song, Yang, and Qi, Hairong},
-  booktitle={IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
-  year={2017},
-  organization={IEEE}
-}
-```
