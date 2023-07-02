@@ -55,8 +55,6 @@ pip install -r requirements.txt
 
 ## Usage
 
-> **Note:** Pre-Trained models are present in _./model/_ directory.
-
 ### Datasets
 
 Download the datasets and place them under _./data/_ folder before training. 
