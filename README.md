@@ -8,7 +8,7 @@
 ![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white)
 ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
 
-This repository contains code for training models to recognize age, gender, and emotion from images and analyzing faces from images or a webcam feed using these models.
+AGenEmozer is a software tool that uses artificial intelligence to make educated guesses about a person's age, gender, and emotional state from a photo.
 
 # Table of Contents
 
