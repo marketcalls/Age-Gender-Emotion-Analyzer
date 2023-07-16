@@ -23,13 +23,11 @@ def load_models():
 def get_image(img_path=None):
     """Load the image for prediction."""
     if img_path is None:
-        # Open webcam if no image is provided
         cap = cv2.VideoCapture(0)
         ret, frame = cap.read()
         cap.release()
         return frame
     else:
-        # Load image from file
         return cv2.imread(img_path)
 
 
@@ -47,7 +45,7 @@ def predict(image, age_model, gender_model, emotion_model):
     i = 0
     for (x, y, w, h) in faces:
         i = i+1
-        cv2.rectangle(image, (x, y), (x+w, y+h), (203, 12, 255), 3)  # Increased thickness
+        cv2.rectangle(image, (x, y), (x+w, y+h), (203, 12, 255), 3)
 
         img_gray = gray[y:y+h, x:x+w]
 
@@ -65,37 +63,32 @@ def predict(image, age_model, gender_model, emotion_model):
         age_input = age_image.reshape(-1, 200, 200, 1)
         output_age = age_ranges[np.argmax(age_model.predict(age_input))]
 
-        output_str = str(i) + ": " + output_gender + ', ' + output_age + ', ' + output_emotion
+        output_str = output_gender + ', ' + output_age + ', ' + output_emotion
         print(output_str)
 
-        text_col = (255, 255, 255)  # Changed color to white
-        box_col = (203, 12, 255)  # Same color as rectangle around the face
+        text_col = (255, 255, 255)
+        box_col = (203, 12, 255)
 
-        # Print the predictions on the image
-        y0, dy = y, 30  # y0 and dy control the position and size of the text background box
+        y0, dy = y, 30
         for j, line in enumerate(output_str.split('\n')):
             yj = y0 + j*dy
             cv2.rectangle(image, (x, yj - dy), (x + w, yj), box_col, -1)
-            cv2.putText(image, line, (x, yj), cv2.FONT_HERSHEY_SIMPLEX, 5, text_col, 25)  # Increased font size and thickness
+            cv2.putText(image, line, (x, yj), cv2.FONT_HERSHEY_SIMPLEX, 1, text_col, 2)  # Increased font size and thickness
 
     plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
     plt.show()
  
 def main():
     """Main function to execute the script."""
-    # Load models
     age_model, gender_model, emotion_model = load_models()
 
-    # Parse command-line arguments
     parser = argparse.ArgumentParser(description='Predict age, gender and emotion from image.')
     parser.add_argument('--image', metavar='path', type=str, help='The path to an image file')
 
     args = parser.parse_args()
 
-    # Load image
     image = get_image(args.image)
 
-    # Predict
     predict(image, age_model, gender_model, emotion_model)
 
 
