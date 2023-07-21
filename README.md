@@ -1,6 +1,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
 
-# AGenEmozer (Age, Gender, and Emotion Analyzer)
+# 🚀 AGenEmozer (Age, Gender, and Emotion Analyzer)
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![OpenCV](https://img.shields.io/badge/opencv-%23white.svg?style=for-the-badge&logo=opencv&logoColor=white)
@@ -43,7 +43,7 @@ The project includes four main Python scripts:
 
 4. **AGenEmozer.py**: This script uses three pre-trained models to analyze faces in images or from a webcam feed. It predicts the age, gender, and emotion for each detected face.
 
-## Installation
+## 🛠 Installation
 
 1. Clone this repository.
 ```bash
@@ -55,7 +55,7 @@ git clone https://github.com/Tejarsha-Arigila/Age-Gender-Emotion-Analyzer.git
 pip install -r requirements.txt
 ```
 
-## Usage
+## 🎮 Usage
 
 ### Datasets
 
@@ -65,7 +65,7 @@ Download the datasets and place them under _./data/_ folder before training.
 2. *Gender* : [UTKFace](https://susanqq.github.io/UTKFace/)
 3. *Emotion* : [CK + 48](https://drive.google.com/drive/folders/1YEOBooxcTI4H8sIXhZ69sKPGhVRFDl_5?usp=drive_link)
 
-### Train the Models
+### 🎓 Train the Models
 
 Each training script accepts a configuration file as an argument. These configuration files are expected to be in YAML format and specify details like the directory of the training data, the model path, the number of epochs for training, and other parameters.
 
@@ -87,7 +87,7 @@ python gender_training.py --config ./configs/gender_config.yaml
 python emotion_training.py --config ./configs/emotion_config.yaml
 ```
 
-### Use the Age, Gender, and Emotion Analyzer
+### 🌟 Use the Age, Gender, and Emotion Analyzer
 
 Run the `AGenEmozer.py` script. 
 
@@ -101,14 +101,14 @@ python AGenEmozer.py --image <image_path.jpg>
 python AGenEmozer.py
 ```
 
-## Note
+## 📢 Note
 
 Please ensure that the models 'age_model.h5', 'gender_model.h5', and 'emotion_model.h5' are present in _./model/_ directory of the project. You can train these models using the provided scripts.
 
-## Contribution
+## 🤝 Contribution
 
 Contributions are welcome! Please create an issue for discussion before submitting a pull request.
 
-## License
+## 📜 License
 
 This project is licensed under the MIT License. Please see the [LICENSE](LICENSE) file for details.
